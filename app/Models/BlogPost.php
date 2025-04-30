@@ -24,7 +24,7 @@ class BlogPost extends Model
 
     protected $attributes = [
         'is_published' => true,
-        'views' => 0
+        // 'views' => 0
     ];
 
    
@@ -38,4 +38,5 @@ class BlogPost extends Model
     {
         return $value ? $value : null;
     }
+ 
 }

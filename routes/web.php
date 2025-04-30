@@ -18,8 +18,9 @@ Route::get('/franchise-info/brochure/download', [FranchiseInfoController::class,
 
 Route::get('/api/blog', [BlogController::class, 'index']);
 Route::get('/api/blog/recent', [BlogController::class, 'recent']);
+Route::get('/api/categories', [BlogController::class, 'byCategory']);
 Route::get('/api/blog/category/{category}', [BlogController::class, 'byCategory']);
-Route::get('/api/blog/{slug}', [BlogPostController::class, 'show']);
+Route::get('/api/blog/{slug}', [BlogController::class, 'show']);
 
 Route::get('/', function () {
     return view('welcome');

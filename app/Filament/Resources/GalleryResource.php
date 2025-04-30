@@ -37,10 +37,16 @@ class GalleryResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('src')
-                    ->label('Image')
-                    ->image()
-                    ->directory('gallery')
-                    ->required(),
+                ->label('Image')
+                ->image()
+                ->directory('gallery') // Saves to: public/uploads/gallery/
+                ->required()
+                ->visibility('public')
+                ->preserveFilenames()
+                ->imageEditor()
+                ->imageResizeMode('cover')
+                ->imageCropAspectRatio('16:9')
+                ->disk('public_uploads'),
                 Forms\Components\TextInput::make('order')
                     ->numeric()
                     ->default(0),
@@ -55,7 +61,9 @@ class GalleryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\ImageColumn::make('src')
-                    ->label('Image'),
+                ->label('Image')
+                ->disk('public_uploads') // Match the upload disk
+                ->url(fn ($record) => asset('uploads/' . $record->image)),
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('alt')
